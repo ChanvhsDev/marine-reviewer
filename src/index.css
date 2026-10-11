@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+html{color-scheme:light;scroll-behavior:smooth}html.dark{color-scheme:dark}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.no-anim *{animation:none!important;transition:none!important}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pop{animation:pop .2s ease-out}
+
+body::before{
+  content:"";
+  position:fixed;
+  right:12px;
+  bottom:76px;
+  width:160px;
+  height:160px;
+  background:url('/cat.jpg') no-repeat center/contain;
+  opacity:.15;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:30;
+}
+html.dark body::before{
+  mix-blend-mode:screen;
+  filter:invert(1);
+  opacity:.12;
+}
+@media (min-width:768px){
+  body::before{bottom:16px;width:220px;height:220px}
+}
