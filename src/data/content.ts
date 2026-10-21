@@ -1,6 +1,6 @@
-// CONTENT LAYER — Marine Environment: Semi-Final 1 + Semi-Final 2 (MARPOL Annex IV – Sewage)
+// CONTENT LAYER — Marine Environment: Semi-Final 1 + 2 (Annex IV – Sewage) + Semi-Final 3 (Annex V – Garbage)
 // Replace src/data/content.ts with this file. Nothing else in the UI needs to change.
-export interface Card{id:string;topic:string;term:string;front:string;back:string;alt?:string[];opts?:string[];only?:'mc';why?:string}
+export interface Card{id:string;topic:string;term:string;front:string;back:string;alt?:string[];opts?:string[];only?:'mc'|'id';why?:string}
 export interface Topic{id:string;subject:string;title:string;intro:string;remember:string;level:string;note?:string}
 
 const topicsSF1:Topic[]=[
@@ -149,5 +149,76 @@ const sf2recv=clue('sf2recv',[
 ['The Organization','The Government of each Party notifies ________ (IMO), for transmission to Contracting Governments, of all cases where facilities are alleged to be inadequate.'],
 ['Regulation 11.1','Regulation 12 applies to governments that require ships in their waters to comply with ________.']])
 
-export const topics:Topic[]=[...topicsSF1,...topicsSF2]
-export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2cert,...sf2recv]
+
+// ───────────────────────── SEMI-FINAL 3 (MARPOL Annex V – Garbage) · IDENTIFICATION ONLY ─────────────────────────
+const S3='Marine Env · Semi-Final 3'
+const idc=(topic:string,rows:[string,string][]):Card[]=>clue(topic,rows).map(c=>({...c,only:'id' as const}))
+const topicsSF3:Topic[]=[
+{id:'sf3intro',subject:S3,title:'Annex V: Purpose, Dates & Regulations',level:'Easy',
+ intro:'What MARPOL Annex V regulates, when it took effect, and the regulations that allow limited discharge.',
+ remember:'Annex V = garbage. In force 31 Dec 1988; revised Annex V in force 1 Jan 2013 and prohibits ALL garbage discharge unless explicitly permitted (Regs 3, 4, 5, 6). Reg 7 = emergency and non-routine exceptions. Port reception facilities are the recommended primary means of discharge.',
+ note:'Your slides also list Garbage Management System, Reception Facilities, Exemptions and Impact of Garbage on the Marine Environment as topics, but the slides do not cover them yet, so there are no questions on them.'},
+{id:'sf3defs',subject:S3,title:'Definition of Terms (Annex V)',level:'Hard',
+ intro:'Ship, garbage, waste, food wastes, plastic, domestic wastes, oil residue, rags, cargo residues, dishwater, e-waste, recycling and reuse.',
+ remember:'Garbage = food wastes + domestic wastes + operational wastes + all plastics + cargo residues + incinerator ashes + cooking oil + fishing gear + animal carcasses. Domestic wastes do NOT include grey water. Recycling = reprocessing; Reuse = no reprocessing.'},
+{id:'sf3disch',subject:S3,title:'General Prohibition & Discharge Rules',level:'Hard',
+ intro:'Distances, screen size and conditions for discharging food waste, cargo residues, cleaning agents and animal carcasses.',
+ remember:'Food waste: ground to 25 mm or less → 3 nm or more; not ground → 12 nm or more; within 500 m of a platform → no discharge. Non-HME cargo residues: en route, not less than 12 nm. HME → onshore reception facility. Mixed garbage → the more stringent rule.'},
+{id:'sf3areas',subject:S3,title:'Special Areas under MARPOL',level:'Easy',
+ intro:'Sea areas that get a higher level of protection under MARPOL.',
+ remember:'Annex V special areas (8): Mediterranean Sea, Baltic Sea, Black Sea, Red Sea, “Gulfs” area, North Sea, Antarctic area (south of 60° S), and the Wider Caribbean region (incl. Gulf of Mexico and Caribbean Sea).'}]
+
+const sf3intro=idc('sf3intro',[
+['MARPOL Annex V','The part of MARPOL that regulates the prevention of pollution by garbage from ships.'],
+['31 December 1988','The date MARPOL Annex V originally entered into force.'],
+['1 January 2013','The date the revised MARPOL Annex V entered into force, prohibiting discharge of all garbage unless explicitly permitted.'],
+['All ships','Unless expressly provided otherwise, Annex V applies to ________, from merchant ships and platforms to pleasure crafts and yachts.'],
+['150','More than ________ countries have signed up to MARPOL Annex V.'],
+['Regulations 3, 4, 5 and 6','Under the revised Annex V, discharge of all garbage into the sea is prohibited except as specifically permitted in ________.'],
+['Regulation 7','The regulation that provides limited exceptions in emergency and non-routine situations.'],
+['Port reception facilities','Ships are recommended to use ________ as the primary means of discharge for all garbage.'],
+['Six','The Annex V Guidelines are divided into ________ sections, from Introduction to Enhancement of compliance.']])
+
+const sf3defs=idc('sf3defs',[
+['Ship','A vessel of any type whatsoever operating in the marine environment, including hydrofoil boats, air-cushioned vehicles, submersibles, floating craft and fixed or floating platforms.'],
+['Shipboard incinerator','A shipboard facility designed for the primary purpose of incineration.'],
+['Garbage','All kinds of food wastes, domestic wastes and operational wastes, all plastics, cargo residues, incinerator ashes, cooking oil, fishing gear and animal carcasses generated during the normal operation of the ship.'],
+['Waste','Useless, unneeded or superfluous matter which is to be discarded.'],
+['Food wastes','Any spoiled or unspoiled food substances, including fruits, vegetables, dairy products, poultry, meat products and food scraps generated aboard ship.'],
+['Plastic','A solid material containing as an essential ingredient one or more high molecular mass polymers, formed during manufacture of the polymer or fabrication into a finished product by heat and/or pressure.'],
+['Domestic wastes','All types of wastes not covered by other MARPOL Annexes that are generated in the accommodation spaces on board; this does not include grey water.'],
+['Oil residue (sludge)','The residual waste oil products generated during normal operation, such as from purification of fuel or lubricating oil, separated waste oil from filtering equipment, drip tray oil, and waste hydraulic and lubricating oils.'],
+['Oily rags','Rags which have been saturated with oil as controlled in Annex I to MARPOL.'],
+['Contaminated rags','Rags which have been saturated with a substance defined as a harmful substance in the Annexes to MARPOL.'],
+['Cargo residues','The remnants of any cargo not covered by other Annexes that remain on deck or in holds after loading or unloading, including excess or spillage, wet or dry, or entrained in wash water (but not cargo dust after sweeping).'],
+['Dishwater','The residue from manual or automatic washing of dishes and cooking utensils that have been pre-cleaned so that adhering food particles would not interfere with automatic dishwashers.'],
+['E-waste (electronic waste)','Electrical and electronic equipment used for the normal operation of the ship or in the accommodation spaces, including components, subassemblies and consumables, with material potentially hazardous to human health and/or the environment.'],
+['Recycling','The activity of segregating and recovering components and materials for reprocessing.'],
+['Reuse','The activity of recovering components and materials for further use without reprocessing.']])
+
+const sf3disch=idc('sf3disch',[
+['25 mm','Comminuted or ground food waste must be able to pass through a screen with openings no greater than ________ before discharge.'],
+['3 nautical miles (3 nm)','While en route, comminuted or ground food waste can be discharged only at this distance or more from the nearest land.'],
+['12 nautical miles (12 nm)','Food waste that has not been comminuted or ground can be discharged only at this distance or more from the nearest land.'],
+['500 meters (500 m)','Ships operating alongside or within ________ of a fixed or floating platform cannot discharge food waste, except under very limited circumstances.'],
+['Harmful to the Marine Environment (HME)','The designation for cargo residues or cleaning agents that cannot be discharged into the sea because of their hazard to aquatic ecosystems.'],
+['Onshore waste reception facility','Cargo residues classified as HME must be discharged to this.'],
+['12 nautical miles (12 nm)','Cargo residues not classified as HME may be discharged en route, as far as practicable from land but not less than this distance from the nearest land.'],
+['International Maritime Dangerous Goods (IMDG) Code','For cleaning agents and additives, HME substances are those identified as marine pollutants in this code.'],
+['Appendix of MARPOL Annex III','HME cleaning agents and additives can also be those meeting the criteria in this.'],
+['The more stringent discharge requirement','When different types of garbage are combined or contaminated by prohibited substances, this rule applies.'],
+['MARPOL designated special area','Animal carcasses may be discharged only when the ship is not in a ________.'],
+['Thoracic and abdominal cavities','An animal carcass must be slit or cut so that these are opened (or passed through a comminuter, grinder, hogger or mincer) before discharge.'],
+['Section 2.12 of the 2017 Guidelines','Animal carcass discharge must be undertaken in accordance with this.'],
+['Australian Biosecurity requirements','Vessels arriving in Australian waters on an international voyage are subject to these, with additional restrictions on food and other waste.']])
+
+const sf3areas=idc('sf3areas',[
+['Special areas','Sea areas under MARPOL, with a higher level of protection than other areas, where special mandatory methods to prevent sea pollution are required for technical reasons relating to oceanographical and ecological condition and sea traffic.'],
+['Eight','The number of special areas listed under Annex V (Garbage).'],
+['Antarctic area','The Annex V special area south of latitude 60 degrees south.'],
+['Wider Caribbean region','The Annex V special area that includes the Gulf of Mexico and the Caribbean Sea.'],
+['North Sea','The Annex V special area in the list that comes after the “Gulfs” area.'],
+['Higher level of protection','Special areas are provided with a ________ than other areas of the sea.']])
+
+export const topics:Topic[]=[...topicsSF1,...topicsSF2,...topicsSF3]
+export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2cert,...sf2recv,...sf3intro,...sf3defs,...sf3disch,...sf3areas]
