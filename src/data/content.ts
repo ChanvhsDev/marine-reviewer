@@ -91,6 +91,9 @@ const topicsSF2:Topic[]=[
 {id:'sf2bio',subject:S2,title:'Biochemical Digestion: Anaerobic vs Aerobic',level:'Medium',
  intro:'How bacteria break down sewage with and without oxygen, and why the two processes give very different results.',
  remember:'Anaerobic = no free oxygen → putrefaction → noxious, toxic, corrosive by-products. Aerobic = needs free oxygen → safe products (water, CO2, inert residue).'},
+{id:'sf2cert',subject:S2,title:'ISPPC: Form of Certificate (Appendix)',level:'Easy',
+ intro:'What the International Sewage Pollution Prevention Certificate certifies and what particulars it lists.',
+ remember:'The ISPPC certifies the ship has a sewage treatment plant, comminutor or holding tank and discharge pipeline complying with Regulations 9 and 10 of Annex IV, and lists ship particulars including the IMO Number.'},
 {id:'sf2recv',subject:S2,title:'Reception Facilities (Regulation 12)',level:'Medium',
  intro:'Port facilities for receiving ship-generated waste, and the duties of governments under Regulation 12.',
  remember:'Regulation 12: governments ensure adequate sewage reception facilities at ports and terminals without delay to ships, and notify the Organization of any alleged inadequacy.'}]
@@ -101,7 +104,12 @@ const sf2stp=clue('sf2stp',[
 ['Prevent marine pollution','The purpose of an STP: to ________, protect aquatic life, and ensure compliance with international maritime regulations.'],
 ['Marine engineers','They must know the operation of the sewage plant before using it, in order to comply with the rules on discarding sewage.'],
 ['Starting and stopping','While operating the plant, the engineer must know the procedure for ________ the sewage treatment plant, plus its maintenance and checks.'],
-['Four','Besides operating procedures, marine engineers should know ________ important terms related to sewage treatment plants.']])
+['Four','Besides operating procedures, marine engineers should know ________ important terms related to sewage treatment plants.'],
+['Treated','Sewage on board ships needs to be ________ before it is discharged to the sea.'],
+['Less harmful','A sewage treatment plant is used to treat the sewage and make it ________ for the sea.'],
+['Maintenance and checks','Engineers must know the procedure for starting and stopping the sewage treatment plant, as well as its ________.'],
+['Recommended levels of pumping out solids','The four key terms are BOD, coliform count, bio-chemical digestion of sewage and ________.'],
+['Bio-chemical digestion of sewage','The four key terms are BOD, coliform count, recommended levels of pumping out solids and ________.']])
 
 const sf2terms=clue('sf2terms',[
 ['Biochemical Oxygen Demand','A test (BOD) to identify biologically decomposable substances and to test the strength of the sewage.'],
@@ -127,6 +135,12 @@ const sf2bio=clue('sf2bio',[
 ['Free oxygen','Aerobic bacteria require ________ to survive.'],
 ['Water, carbon dioxide and inert residue','Safe products of the aerobic process (along with energy to synthesize new bacteria).']])
 
+const sf2cert=clue('sf2cert',[
+['Regulations 9 and 10','The ISPPC certifies the ship’s sewage equipment and discharge pipeline comply with ________ of Annex IV.'],
+['Sewage treatment plant, comminutor or holding tank','The ISPPC certifies that the ship is equipped with a discharge pipeline and one of these: a ________.'],
+['IMO Number','Ship particulars on the ISPPC include name, distinctive number or letter, port of registry, gross tonnage, number of persons certified to carry, and ________.'],
+['International Sewage Pollution Prevention Certificate','The certificate (ISPPC) whose form appears in the Appendix and is issued under MARPOL provisions.']])
+
 const sf2recv=clue('sf2recv',[
 ['Reception facilities','Facilities designed to receive ship-generated waste such as oily residues, garbage and other contaminants, so waste is not discharged into the ocean.'],
 ['Regulation 12','The regulation on reception facilities.'],
@@ -136,4 +150,4 @@ const sf2recv=clue('sf2recv',[
 ['Regulation 11.1','Regulation 12 applies to governments that require ships in their waters to comply with ________.']])
 
 export const topics:Topic[]=[...topicsSF1,...topicsSF2]
-export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2recv]
+export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2cert,...sf2recv]
