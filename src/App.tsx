@@ -80,7 +80,7 @@ function Home({s,go,start}:P){
       <Panel><h2 className="font-semibold">Progress</h2><div className="my-2"><Bar pct={overall} label="Overall progress"/></div>
         <p className="text-sm">Overall {overall}% · Recent quiz: {last?`${last.score}/${last.total}`:'none yet'} · Saved: {s.marks.length}</p></Panel></div>
     <h2 className="pt-2 text-lg font-semibold">Topics</h2>
-    <div className="grid gap-3 sm:grid-cols-2">{ps.map(x=><Panel key={x.t.id}><div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">{x.t.subject} · {x.t.level}</div>
+    <div className="grid gap-3 sm:grid-cols-2">{ps.map(x=><Panel key={x.t.id}><div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">{x.t.subject} · {x.t.level}</div>{x.t.meta&&<div className="text-xs text-slate-500 dark:text-slate-400">{x.t.meta}</div>}
       <h3 className="my-1 font-semibold">{x.t.title}</h3><Bar pct={x.pct} label={x.t.title+' progress'}/>
       <p className="my-2 text-sm">{x.pct}% · {x.level} · Questions: {x.ok}/{x.tot} correct · Flashcards: {x.known}/{x.n} known</p>
       <div className="flex gap-2"><Button v="s" onClick={()=>go('study',x.t.id)}>Review</Button><Button v="s" onClick={()=>go('cards',x.t.id)}>Cards</Button>
@@ -94,7 +94,7 @@ function Study({s,up,go,start,topic}:P){
   const rows:[string,string][]=topic==='periods'?Object.entries(cs.reduce((a,c)=>{(a[c.back]??=[]).push(c.term);return a},{} as Record<string,string[]>)).map(([k,v])=>[k,v.join(' · ')])
     :cs.map(c=>[c.term,c.why&&c.id.endsWith('Ev')?c.why:fill(c)])
   return<div className="space-y-4"><Button v="g" onClick={()=>go('study')}>← All topics</Button>
-    <div className="flex items-start justify-between gap-2"><div><div className="text-sm text-slate-500 dark:text-slate-400">{t.subject} · {t.level}</div><H>{t.title}</H></div>
+    <div className="flex items-start justify-between gap-2"><div><div className="text-sm text-slate-500 dark:text-slate-400">{t.subject} · {t.level}</div>{t.meta&&<div className="text-sm text-slate-500 dark:text-slate-400">{t.meta}</div>}<H>{t.title}</H></div>
       <Button v="s" aria-pressed={on} onClick={()=>up(x=>({...x,marks:on?x.marks.filter(m=>m!==key):[...x.marks,key]}))}>{on?'🔖 Saved':'Save'}</Button></div>
     <p>{t.intro}</p>
     <Panel className="border-rose-300 bg-rose-50 dark:border-rose-800 dark:bg-rose-950"><h2 className="font-semibold">Remember This</h2><p>{t.remember}</p></Panel>

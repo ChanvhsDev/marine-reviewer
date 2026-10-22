@@ -1,7 +1,7 @@
-// CONTENT LAYER — Marine Environment: Semi-Final 1 + 2 (Annex IV – Sewage) + Semi-Final 3 (Annex V – Garbage)
+// CONTENT LAYER — Marine Environment: Semi-Final 1 + 2 (Annex IV – Sewage) + Semi-Final 3 (Annex V – Garbage) + Semi-Final 4 (Exam review)
 // Replace src/data/content.ts with this file. Nothing else in the UI needs to change.
 export interface Card{id:string;topic:string;term:string;front:string;back:string;alt?:string[];opts?:string[];only?:'mc'|'id';why?:string}
-export interface Topic{id:string;subject:string;title:string;intro:string;remember:string;level:string;note?:string}
+export interface Topic{id:string;subject:string;title:string;intro:string;remember:string;level:string;note?:string;meta?:string}
 
 const topicsSF1:Topic[]=[
 {id:'overview',subject:'Marine Env · Semi-Final 1',title:'Overview: Purpose & Applicability',level:'Easy',
@@ -220,5 +220,60 @@ const sf3areas=idc('sf3areas',[
 ['North Sea','The Annex V special area in the list that comes after the “Gulfs” area.'],
 ['Higher level of protection','Special areas are provided with a ________ than other areas of the sea.']])
 
-export const topics:Topic[]=[...topicsSF1,...topicsSF2,...topicsSF3]
-export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2cert,...sf2recv,...sf3intro,...sf3defs,...sf3disch,...sf3areas]
+
+// ───────────────────────── SEMI-FINAL 4 · EXAM REVIEW (Identification only, grouped by priority) ─────────────────────────
+const S4='Marine Env · Semi-Final 4'
+const META4='Capt. Bayani L. Cataluña · October 22, 2026'
+const topicsSF4:Topic[]=[
+{id:'sf4high',subject:S4,meta:META4,title:'Exam Identification: High Priority (18)',level:'High Priority',
+ intro:'The 18 items marked HIGH PRIORITY in the Semi-Final Examination (Annex IV and Annex V). Review these first.',
+ remember:'Start here. Annex IV = sewage, Annex V = garbage. Distances: 12 nm untreated sewage; 3–12 nm comminuted and disinfected; food waste 25 mm screen, 3 nm ground, 12 nm not ground. Know BOD, coliform (under 100 per 100 ml), anaerobic vs aerobic, ISPPC, HME and Special Areas.',
+ note:'In the exam key, item 2 (400 GT and above) also covers ships under 400 GT certified to carry more than 15 persons.'},
+{id:'sf4imp',subject:S4,meta:META4,title:'Exam Identification: Important (12)',level:'Important',
+ intro:'The 12 items marked IMPORTANT in the Semi-Final Examination.',
+ remember:'Dates: Annex V in force 31 Dec 1988; revised 1 Jan 2013. Numbers: 400 billion coliform (summer), 300–400 mg/L raw suspended solids, 500 m from platforms. Regulation 12 = sewage reception facilities. Recycling = reprocessing; Reuse = no reprocessing.'},
+{id:'sf4add',subject:S4,meta:META4,title:'Exam Identification: Additional Review (2)',level:'Additional Review',
+ intro:'The 2 items marked ADDITIONAL REVIEW in the Semi-Final Examination.',
+ remember:'Putrefaction = anaerobic breakdown of organic matter. PRFD = Port Reception Facility Database, an IMO module of GISIS.',
+ note:'The PRFD item is not in your Week 1–3 slides. It comes only from the exam review.'}]
+
+const sf4high=idc('sf4high',[
+['MARPOL Annex IV','The specific MARPOL Annex that regulates the prevention of pollution by sewage from ships.'],
+['400 Gross Tonnage (GT) and above','The ship size applicability threshold under MARPOL Annex IV covering every vessel engaged in international voyages.'],
+['12 nautical miles (12 nm)','The minimum distance from land where untreated sewage may be discharged, provided the ship is en route and proceeding at not less than 4 knots.'],
+['Biochemical Oxygen Demand (BOD)','A test used to identify biodegradable substances and measure the strength of sewage, based on the activity of bacteria consuming organic matter in the presence of oxygen.'],
+['Coliform','The type of organisms present in the human intestine that serve as indicator organisms of sewage pollution and pathogen presence.'],
+['Less than 100 thermotolerant coliforms per 100 ml','The maximum recommended faecal coliform count per 100 ml of effluent after treatment, as updated by IMO MEPC 159.'],
+['Anaerobic process','The biological digestion process where bacteria multiply in the absence of free oxygen, producing noxious, toxic and highly corrosive by-products such as methane and hydrogen sulphide.'],
+['Aerobic process','The biological digestion process that requires free oxygen to break down organic matter into safe products like water and carbon dioxide.'],
+['International Sewage Pollution Prevention Certificate (ISPPC)','The official international certificate issued to a ship certifying it is equipped with an approved sewage treatment plant, comminutor or holding tank in compliance with Annex IV.'],
+['MARPOL Annex V','The specific MARPOL Annex that regulates the prevention of pollution by garbage from ships.'],
+['January 1, 2013','The exact date the revised MARPOL Annex V entered into force, reversing the historical presumption and strictly prohibiting the discharge of all garbage unless explicitly permitted.'],
+['Food wastes','Any spoiled or unspoiled food substances, including fruits, vegetables, dairy products, poultry, meat products and food scraps generated aboard ship.'],
+['Plastic','A solid material containing as an essential ingredient one or more high molecular mass polymers formed during manufacture or fabrication by heat and/or pressure.'],
+['Harmful to the Marine Environment (HME)','The safety designation given to cargo residues, cleaning agents or additives that cannot be discharged into the sea due to their hazard to aquatic ecosystems.'],
+['25 mm','The maximum screen opening size, in millimeters, that comminuted or ground food waste must be able to pass through before discharge at sea.'],
+['3 nautical miles (3 nm)','The minimum distance from the nearest land required when discharging comminuted or ground food waste while the vessel is en route.'],
+['12 nautical miles (12 nm)','The minimum distance from land required when discharging food waste that has not been comminuted or ground.'],
+['Special Areas','Sea areas given a higher level of mandatory protection under MARPOL due to technical, oceanographical and ecological conditions and traffic density.']])
+
+const sf4imp=idc('sf4imp',[
+['3 to 12 nautical miles (3-12 nm)','The minimum distance range from land where sewage that has been comminuted and disinfected may be discharged.'],
+['400 billion','The approximate number of coliform organisms contributed by a single human being during the summer season.'],
+['300-400 mg/liter','The approximate level of suspended solids typically found in raw sewage before treatment.'],
+['Regulation 12','The regulation under MARPOL Annex IV that mandates governments to ensure adequate port reception facilities for sewage without causing undue delay to ships.'],
+['December 31, 1988','The exact date on which MARPOL Annex V originally entered into force.'],
+['Domestic wastes','All types of wastes generated in accommodation spaces on board a ship that are not covered by other MARPOL Annexes, excluding grey water.'],
+['Cargo residues','The remnants of any non-Annex cargo remaining on deck or in holds after loading or unloading, including spillage and excess.'],
+['E-waste (electronic waste)','Discarded electrical and electronic equipment used in ship operations containing materials potentially hazardous to human health or the environment.'],
+['Recycling','The waste management activity that involves segregating and recovering components and materials for reprocessing.'],
+['Reuse','The waste management activity that involves recovering components and materials for further use without reprocessing.'],
+['500 meters (500 m)','The safety distance within which ships operating alongside or within fixed or floating platforms are strictly prohibited from discharging food waste.'],
+['International Maritime Dangerous Goods (IMDG) Code','The code governing substances classified as marine pollutants when evaluating cleaning agents, additives or dangerous goods.']])
+
+const sf4add=idc('sf4add',[
+['Putrefaction','The technical term for the process that occurs during anaerobic digestion of sewage.'],
+['Port Reception Facility Database (PRFD)','The official database developed by the IMO as a module of GISIS to give the public and member states access to port reception facility information.']])
+
+export const topics:Topic[]=[...topicsSF1,...topicsSF2,...topicsSF3,...topicsSF4]
+export const cards:Card[]=[...cardsSF1,...sf2stp,...sf2terms,...sf2bio,...sf2cert,...sf2recv,...sf3intro,...sf3defs,...sf3disch,...sf3areas,...sf4high,...sf4imp,...sf4add]
